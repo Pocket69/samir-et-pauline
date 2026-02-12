@@ -36,20 +36,38 @@
       background-color: #999;
       color: white;
     }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <h1 id="question">Samir, veux-tu être ma loutre ? 🦦</h1>
+  <h1 id="question">Samir, veux-tu être mon Valentin ? ❤️</h1>
 
   <button id="yes">Oui ❤️</button>
   <button id="no">Non</button>
+
+  <!-- Musique romantique -->
+  <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
   <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     const question = document.getElementById("question");
+    const music = document.getElementById("music");
 
     let yesSize = 20;
     let clickCount = 0;
@@ -66,12 +84,10 @@
     noBtn.addEventListener("click", function() {
       clickCount++;
 
-      // Agrandir le bouton OUI
       yesSize += 15;
       yesBtn.style.fontSize = yesSize + "px";
       yesBtn.style.padding = (yesSize / 2) + "px";
 
-      // Changer le texte
       if (clickCount <= messages.length) {
         question.textContent = messages[clickCount - 1];
       } else {
@@ -81,13 +97,37 @@
     });
 
     yesBtn.addEventListener("click", function() {
+
+      // Lancer musique
+      music.play();
+
+      // Changer écran
       document.body.innerHTML = `
         <h1 style="margin-top:150px; font-size:50px;">
-          JE SAVAIS QUE TU ALLAIS DIRE OUI 😍❤️ #mybodymychoice #nonconsentement?pasdutout
+          JE SAVAIS QUE TU ALLAIS DIRE OUI 😍❤️ #mybodymychoice #nonconsentement?pasdutout 
         </h1>
       `;
+
+      // Pluie de cœurs
+      setInterval(createHeart, 200);
     });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      heart.style.fontSize = (Math.random() * 30 + 20) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
   </script>
 
 </body>
 </html>
+
