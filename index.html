@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Samir veux-tu être ma loutre ? 🦦</title>
+
+  <style>
+    body {
+      text-align: center;
+      background-color: #ffe6f0;
+      font-family: Arial, sans-serif;
+      margin-top: 100px;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 40px;
+      transition: 0.3s;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 20px;
+      margin: 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background-color: #999;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 id="question">Samir, veux-tu être ma loutre ? 🦦</h1>
+
+  <button id="yes">Oui ❤️</button>
+  <button id="no">Non</button>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const question = document.getElementById("question");
+
+    let yesSize = 20;
+    let clickCount = 0;
+
+    const messages = [
+      "T’es sûr ? 😳",
+      "Vraiment sûr ??",
+      "Réfléchis bien 😏",
+      "Tu vas regretter 👀",
+      "Dernière chance 😈",
+      "Dis oui pétard ! 😭❤️"
+    ];
+
+    noBtn.addEventListener("click", function() {
+      clickCount++;
+
+      // Agrandir le bouton OUI
+      yesSize += 15;
+      yesBtn.style.fontSize = yesSize + "px";
+      yesBtn.style.padding = (yesSize / 2) + "px";
+
+      // Changer le texte
+      if (clickCount <= messages.length) {
+        question.textContent = messages[clickCount - 1];
+      } else {
+        question.textContent = "Bon… tu n’as plus le choix 😌❤️";
+        noBtn.style.display = "none";
+      }
+    });
+
+    yesBtn.addEventListener("click", function() {
+      document.body.innerHTML = `
+        <h1 style="margin-top:150px; font-size:50px;">
+          JE SAVAIS QUE TU ALLAIS DIRE OUI 😍❤️ #mybodymychoice #nonconsentement?pasdutout
+        </h1>
+      `;
+    });
+  </script>
+
+</body>
+</html>
